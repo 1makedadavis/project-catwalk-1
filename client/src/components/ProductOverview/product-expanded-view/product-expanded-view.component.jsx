@@ -83,8 +83,8 @@ const ProductExpandedView = ({ expandView }) => {
                     {currentStyle.photos.map((photo, index) => {
                       if (page === index) {
                         return (
-                          <figure onClick={(e) => handleZoom(e, photo.url)} style={!zoom ? { backgroundImage: `url(${photo.url})`, backgroundPosition: '0% 0%'} : zoom} onMouseMove={(e) => handleMouseMove(e, photo.url)}>
-                            <img className={!zoomState ? "expanded-view-main" : "expanded-view-main active"} src={photo.url} />
+                          <figure onClick={(e) => handleZoom(e, photo.photo_url)} style={!zoom ? { backgroundImage: `url(${photo.photo_url})`, backgroundPosition: '0% 0%'} : zoom} onMouseMove={(e) => handleMouseMove(e, photo.photo_url)}>
+                            <img className={!zoomState ? "expanded-view-main" : "expanded-view-main active"} src={photo.photo_url} />
                           </figure>
                         )
                       }
