@@ -28,8 +28,8 @@ const ProductState = props => {
 
   // GET PRODUCTS
   useEffect(() => {
-    getProductInfo('40348');
-    getProductStyles('40348');
+    getProductInfo('1');
+    getProductStyles('1');
   }, [])
 
   const getProducts = async () => {
@@ -51,6 +51,7 @@ const ProductState = props => {
   }
 
   const getProductStyles = async (id) => {
+    console.log("PRODID", id)
     const res = await Axios.get(`${API_URL}/${id}/styles`);
 
     dispatch({
@@ -60,8 +61,9 @@ const ProductState = props => {
   }
 
   const getCurrentStyle = (id) => {
-    const res = state.productStyles.results.find((product) => product.style_id == id);
-
+    console.log("ID", id)
+    const res = state.productStyles.results.find((product) => product.id == id);
+    console.log("CURRENT", id, state.productStyles.result, res)
     dispatch({
       type: GET_CURRENT_STYLE,
       payload: res

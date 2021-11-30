@@ -1,6 +1,6 @@
 const axios = require('axios');
-const { accessToken, apiUrl } = require('./config.js');
-
+const { accessToken } = require('./config.js');
+const apiUrl = 'http://localhost:3010'
 const headers = {
   'Authorization': `${accessToken}`
 };

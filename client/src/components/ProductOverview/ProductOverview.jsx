@@ -57,9 +57,10 @@ const ProductOverview = () => {
             <h4 className="product-style-title">{productInfo.category}</h4>
             <h1 className="product-name">{productInfo.name}</h1>
 
-            {!currentStyle.sale_price ? <h3>$ {currentStyle.original_price}</h3> : <div> <strike style={{ color: "red"}}>$ {currentStyle.original_price}</strike><h3>$ {currentStyle.sale_price}</h3></div>}
+            {currentStyle && currentStyle.sales_price === 'null'? <h3>$ {currentStyle.original_price}</h3> :currentStyle && currentStyle.sales_price !== 'null'? <div> <strike style={{ color: "red"}}>$ {currentStyle.original_price}</strike><h3>$ {currentStyle.sales_price}</h3></div>: <></>}
           </div>
-          <h4>Select Style <span style={{ fontWeight: '20'}}>&gt; {currentStyle.name}</span></h4>
+
+          <h4>Select Style <span style={{ fontWeight: '20'}}>&gt; {(currentStyle && currentStyle.name) && currentStyle.name}</span></h4>
           <ProductStyleSelector />
           <ProductDropdown />
           <ProductSocialMedia />

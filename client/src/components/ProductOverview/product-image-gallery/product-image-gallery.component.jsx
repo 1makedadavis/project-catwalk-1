@@ -25,16 +25,18 @@ const ProductImageGallery = ({ expandView }) => {
   const handlePageChange = (e) => {
     if (e.target.name === "back") {
       if (page === 0) {
-        setPage(currentStyle.photos.length - 1)
+        setPage(currentStyle && currentStyle.photos.length - 1)
       } else {
         setPage(page - 1)
       }
     } else {
+      if(currentStyle && currentStyle.photos){
       if (page === currentStyle.photos.length - 1) {
         setPage(0)
       } else {
         setPage(page + 1)
       }
+    }
     }
   }
 
@@ -53,7 +55,7 @@ const ProductImageGallery = ({ expandView }) => {
     ref.current.scrollTop -= height
   }
 
-    if (!currentStyle.photos) {
+    if (currentStyle && !currentStyle.photos) {
       return <p>Loading...</p>
     } else {
     return (
@@ -62,10 +64,10 @@ const ProductImageGallery = ({ expandView }) => {
         <div className="product-image-gallery-main">
             <img src={leftArrow} style={{ height: '30px', width: '30px'}} className="left-arrow" onClick={handlePageChange} name="back" value={page} alt="left-arrow"/>
 
-            {currentStyle.photos.map((photo, index) => {
+            {currentStyle && currentStyle.photos.map((photo, index) => {
               if (page === index) {
                 return (
-                  <img className="image-gallery-main" alt="image-gallery-main" src={photo.url} onClick={expandView}/>
+                  <img className="image-gallery-main" alt="image-gallery-main" src={photo.photo_url} onClick={expandView}/>
                 )
               }
             })}
@@ -76,7 +78,7 @@ const ProductImageGallery = ({ expandView }) => {
           <img src={upArrow} alt="up-arrow" className={displayUpArrow ? "up-arrow" : "up-arrow active"} style={{ height: '25px', width: '25px'}} onClick={() => handleScroll(height/2)}/>
 
           <div className="product-image-gallery-thumbnail-display" ref={ref} onLoad={handleLoad}>
-            {currentStyle.photos && currentStyle.photos.map((photo, index, key) => (
+            {currentStyle && currentStyle.photos && currentStyle.photos.map((photo, index, key) => (
               <div key={index}>
                 <img src={photo.thumbnail_url} className={ page === index ? "image-gallery-thumbnail active" : "image-gallery-thumbnail" } onClick={handleClick} name={index} />
               </div>

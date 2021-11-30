@@ -2,6 +2,7 @@ const path = require("path")
 const parser = require('body-parser');
 const express = require("express"); // npm installed
 const cors = require('cors');
+const axios = require('axios');
 var compression = require('compression')
 
 const { getProducts, getProduct, getProductStyles, getRelatedProducts, getReviews, getReviewMetaData, postReview, markReview, reportReview, getQuestions, getAnswers, postQuestion, postAnswer, voteQuestionHelpful, voteAnswerHelpful, reportAnswer } = require('./helper.js');
@@ -13,8 +14,10 @@ app.use(parser.urlencoded({ extended: true }))
 app.use(parser.json());
 app.use(express.static(path.join(__dirname, "/client/dist")));
 // other configuration...
-
-// Get Products
+// app.get('/api/products', async(req, res) => {
+//   var data = await axios.get('http://localhost:3010/products')
+//   console.log(data)
+// })
 app.get('/api/products', async (req, res) => {
   var data = await getProducts();
   res.send(data);
